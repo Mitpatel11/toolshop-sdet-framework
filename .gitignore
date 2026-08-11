@@ -39,3 +39,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Internal planning docs - kept locally, not pushed to the public repo
+Roadmap.md
+PROGRESS.md
+BACKLOG.md
+ISSUES.md
