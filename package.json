@@ -1,0 +1,23 @@
+{
+  "name": "playwright-automation-framework",
+  "version": "1.0.0",
+  "description": "A Playwright + TypeScript test automation framework built against\r [Practice Software Testing (Toolshop)](https://github.com/testsmith-io/practice-software-testing),\r covering UI, API, database, and performance testing layers.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mitpatel11/toolshop-sdet-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mitpatel11/toolshop-sdet-framework/issues"
+  },
+  "homepage": "https://github.com/Mitpatel11/toolshop-sdet-framework#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}
