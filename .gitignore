@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Playwright artifacts
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Session state (contains live auth tokens/cookies - never commit)
+storageState/
+**/*.storageState.json
+
+# Allure
+/allure-results/
+/allure-report/
+
+# k6 output
+/k6/results/
+
+# DB dumps / local docker volumes
+*.sql.local
+docker/mysql-data/
+
+# Excel/data files with real generated data (keep templates, not runs)
+/test-data/generated/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Internal planning docs - kept locally, not pushed to the public repo
+Roadmap.md
+PROGRESS.md
+BACKLOG.md
+ISSUES.md
+DAILY_PLAYBOOK.md
