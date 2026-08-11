@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "ms-playwright.playwright",
+    "eamodio.gitlens",
+    "dbaeumer.vscode-eslint"
+  ]
+}
