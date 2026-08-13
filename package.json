@@ -1,7 +1,7 @@
 {
   "name": "playwright-automation-framework",
   "version": "1.0.0",
-  "description": "A Playwright + TypeScript test automation framework built against\r [Practice Software Testing (Toolshop)](https://github.com/testsmith-io/practice-software-testing),\r covering UI, API, database, and performance testing layers.",
+  "description": "A Playwright + TypeScript test automation framework for Practice Software Testing (Toolshop)",
   "main": "index.js",
   "scripts": {},
   "repository": {
