@@ -22,7 +22,7 @@ test.describe('Add to Cart', () => {
 
         await page.getByRole('link', { name: 'cart' }).click();
 
-        const cartRow = page.locator('tbody tr', { hasText: item });
+        const cartRow = page.locator('tbody tr').filter({ has: page.locator('td span').getByText(item, { exact: true }) });
         await expect(cartRow).toHaveCount(1);
         await expect(cartRow).toContainText(item);
     });
