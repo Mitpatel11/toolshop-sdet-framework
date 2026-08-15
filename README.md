@@ -17,4 +17,9 @@ Work in progress — built incrementally, one layer at a time.
 - k6 performance testing
 
 ## Status
-Early setup. See commit history for progress.
+Week 1 Comepleted and Moved to next week. 
+
+## Lessons Learned
+ - Git and github concepts learned. 
+ - Happy Path Flows and basic configs
+ - Raw scripts duplicate search/locator logic across every test file
