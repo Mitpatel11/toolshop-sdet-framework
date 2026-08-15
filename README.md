@@ -17,4 +17,4 @@ Work in progress — built incrementally, one layer at a time.
 - k6 performance testing
 
 ## Status
-Early setup. See commit history for progress.
+ - End to End Test created, now i will refactor it to POM. 
