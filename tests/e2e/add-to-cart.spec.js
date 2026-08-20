@@ -1,36 +1,36 @@
 const { test, expect } = require('@playwright/test');
-const { ProductPage } = require('../../pages/ProductPage');
+const { PageManager } = require('../../pages/PageManager');
+
 
 test.describe('Add to Cart', () => {
-    let basePage;
-
+    let pages;
     test.beforeEach(async ({ page }) => {
-        basePage = new BasePage(page);
-        await basePage.goTo('/');
+        pages = new PageManager(page);
+        await pages.productPage.goTo('/');
     });
-    const item = 'Hammer';
 
+    const email = process.env.USER_EMAIL;
+    const password = process.env.USER_PASSWORD;
     test('should add a searched product to the cart', async ({ page }) => {
+        const item = 'Hammer';
+       /** const loginPage = */  await pages.basePage.goToSignin();   // const not needed as no return from the basePage
+        await pages.loginPage.login(email, password);
 
-        //await page.getByPlaceholder('Search').fill(item);
-        //await page.getByRole('button', { name: 'Search' }).click();
+        await expect(page).toHaveURL(/account/);
+        await pages.basePage.goToHome();
 
-        await basePage.searchItem("Hammer");
-        const product = await page
-            .locator('[data-test="product-name"]')
-            .filter({ hasText: new RegExp(`^\\s*${item}\\s*$`) });
+        await pages.productPage.searchItem(item);
+        const product = pages.productPage.filterProduct(item);
         await expect(product).toHaveCount(1);
         await product.click();
 
-        await expect(page.locator('[data-test="product-name"]')).toHaveText(item);
+        await expect(pages.productPage.productName).toHaveText(item);
 
-        await page.getByRole('button', { name: 'Add to cart' }).click();
-        await expect(basePage.toast).toContainText('Product added to shopping cart.');
+        await pages.productPage.addToCart();
+        await expect(pages.productPage.toast).toContainText('Product added to shopping cart.');
+        await pages.productPage.goToCart();
 
-        //await page.getByRole('link', { name: 'cart' }).click();
-        await basePage.goToCart();
-
-        const cartRow = page.locator('tbody tr').filter({ has: page.locator('td span').getByText(item, { exact: true }) });
+        const cartRow = pages.cartPage.VerifyProduct(item);
         await expect(cartRow).toHaveCount(1);
         await expect(cartRow).toContainText(item);
     });

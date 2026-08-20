@@ -1,5 +1,3 @@
-const { LoginPage } = require('./LoginPage');
-
 class BasePage {
     constructor(page) {
         this.page = page;
@@ -16,7 +14,7 @@ class BasePage {
 
     async goToSignin() {
         await this.signInLink.click();
-        return new LoginPage(this.page);
+        //return new LoginPage(this.page);     //As we are using PageManager we can skip this line.
     }
 
     async goToHome() {
