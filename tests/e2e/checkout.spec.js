@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { BasePage } = require('../../pages/BasePage');
 const { ProductPage } = require('../../pages/ProductPage');
 const { CartPage } = require('../../pages/CartPage');
+const { CheckoutPage } = require('../../pages/CheckoutPage');
 
 
 test.describe('Checkout Flow', () => {
@@ -46,19 +47,22 @@ test.describe('Checkout Flow', () => {
         await cartPage.proceedToCheckout();
 
 
-
+        const checkoutPage = new CheckoutPage(page);
         await expect(page.getByText("You can proceed to checkout.")).toBeVisible();
-        await page.locator('button').filter({ hasText: 'Proceed to checkout' }).nth(1).click();
+        await checkoutPage.checkoutToAddress();
 
         //await page.locator("#country").selectOption("Ireland");
 
         await expect(page.getByLabel("Street")).not.toHaveValue('');   // proves the one-shot auto-fill already ran
 
-        await page.getByLabel("Postal Code").fill('D01X000');
-        await page.getByLabel("House number").fill('130');
-        await page.getByLabel("Street").fill("IFSC");
-        await page.getByLabel("City").fill("Dublin");
-        await page.getByLabel("State").fill("Leinster");
+        const address = {
+            postalCode: 'D01X000',
+            houseNumber: '130',
+            street: 'IFSC',
+            city: 'Dublin',
+            state: 'Leinster',
+        };
+        await checkoutPage.fillAddress(address);
 
         // await page.getByLabel("Postal Code").fill('D01X000');
         // await page.getByLabel("House number").fill('130');
@@ -70,16 +74,15 @@ test.describe('Checkout Flow', () => {
         //  await page.getByLabel("State").fill("Leinster");
 
 
-        await page.getByRole("button", { name: "Proceed to checkout" }).click();
-
-        await page.locator("#payment-method").selectOption("Cash on Delivery");
-        await page.getByRole('button', { name: 'Confirm' }).click();
+        await checkoutPage.checkoutToPayments();
+        const paymethod = "Cash on Delivery";
+        await checkoutPage.paymentMethodSelect(paymethod);
 
         await expect(page.getByText("Payment was successful")).toBeVisible();
         await expect(page.getByRole('button', { name: 'Confirm' })).toBeVisible();
-        await page.getByRole('button', { name: 'Confirm' }).click();
+        await checkoutPage.ConfirmOrder();
 
-        const invoiceNum = await page.locator("#order-confirmation span").textContent();
+        const invoiceNum = await checkoutPage.getInvoiceNumber();
         console.log(invoiceNum);
 
     });
