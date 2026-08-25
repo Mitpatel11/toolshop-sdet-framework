@@ -2,7 +2,7 @@ const { test, expect } = require('../../fixtures/base');
 const { expectAddedToCartToast } = require('../../utils/assertions');
 
 
-test('comeplete the checkout and place order', async ({ loggedInPages, pages, page }) => {
+test('comeplete the checkout and place order', { tag: ['@smoke'] }, async ({ loggedInPages, pages, page }) => {
     const item = 'Hammer';
 
     await loggedInPages.productPage.searchItem(item);

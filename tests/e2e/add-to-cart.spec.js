@@ -1,6 +1,6 @@
 const { test, expect } = require('../../fixtures/base');
 const { expectAddedToCartToast } = require('../../utils/assertions');
-test('should add a searched product to the cart', async ({ loggedInPages, pages }) => {
+test('should add a searched product to the cart', { tag: ['@regression'] }, async ({ loggedInPages, pages }) => {
     const item = 'Hammer';
     await loggedInPages.productPage.searchItem(item);
     const product = pages.productPage.filterProduct(item);
