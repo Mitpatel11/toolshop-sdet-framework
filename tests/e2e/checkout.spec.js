@@ -1,5 +1,5 @@
 const { test, expect } = require('../../fixtures/base');
-
+const { expectAddedToCartToast } = require('../../utils/assertions');
 
 
 test('comeplete the checkout and place order', async ({ loggedInPages, pages, page }) => {
@@ -13,7 +13,7 @@ test('comeplete the checkout and place order', async ({ loggedInPages, pages, pa
     await expect(pages.productPage.productName).toHaveText(item);
 
     await pages.productPage.addToCart();
-    await expect(pages.productPage.toast).toContainText('Product added to shopping cart.');
+    await expectAddedToCartToast(pages);
     await pages.productPage.goToCart();
 
     const cartRow = pages.cartPage.VerifyProduct(item);
