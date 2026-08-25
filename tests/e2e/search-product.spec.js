@@ -1,7 +1,7 @@
 const { test, expect } = require('../../fixtures/base');
 
 
-test.describe('Search A Product', () => {
+test.describe('Search A Product', { tag: ['@regression'] }, () => {
     test('Search product and assert', async ({ pages }) => {
         const item = 'Hammer';
         await pages.productPage.searchItem(item);
