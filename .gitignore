@@ -48,4 +48,4 @@ ISSUES.md
 DAILY_PLAYBOOK.md
 
 # Playwright
-/playwright/.auth/
+playwright/.auth/
