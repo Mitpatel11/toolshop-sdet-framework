@@ -1,19 +1,19 @@
 const { test, expect } = require('../../fixtures/base');
 const { expectAddedToCartToast } = require('../../utils/assertions');
-test('should add a searched product to the cart', { tag: ['@regression'] }, async ({ loggedInPages, pages }) => {
+test('should add a searched product to the cart', { tag: ['@regression'] }, async ({ sessionPages }) => {
     const item = 'Hammer';
-    await loggedInPages.productPage.searchItem(item);
-    const product = pages.productPage.filterProduct(item);
+    await sessionPages.productPage.searchItem(item);
+    const product = sessionPages.productPage.filterProduct(item);
     await expect(product).toHaveCount(1);
     await product.click();
 
-    await expect(pages.productPage.productName).toHaveText(item);
+    await expect(sessionPages.productPage.productName).toHaveText(item);
 
-    await pages.productPage.addToCart();
-    await expectAddedToCartToast(pages);
-    await pages.productPage.goToCart();
+    await sessionPages.productPage.addToCart();
+    await expectAddedToCartToast(sessionPages);
+    await sessionPages.productPage.goToCart();
 
-    const cartRow = pages.cartPage.VerifyProduct(item);
+    const cartRow = sessionPages.cartPage.VerifyProduct(item);
     await expect(cartRow).toHaveCount(1);
     await expect(cartRow).toContainText(item);
 });
