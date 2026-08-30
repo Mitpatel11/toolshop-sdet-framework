@@ -1,0 +1,49 @@
+$kind: http-request
+name: New Request
+url: "{{baseUrl}}/carts/{{cartId}}"
+method: GET
+headers:
+  Accept: application/json
+scripts:
+  - type: afterResponse
+    code: "// Parse the response\r
+
+      const response = pm.response.json();\r
+
+      \r
+
+      // Test: Check status is 200 OK\r
+
+      pm.test(\"Status code is 200 OK\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      // Test: cart has the expected top-level id\r
+
+      pm.test(\"Response contains cart id\", function () {\r
+
+      \    pm.expect(response).to.have.property(\"id\");\r
+
+      });\r
+
+      \r
+
+      // Test: cart_items is an array\r
+
+      pm.test(\"cart_items is an array\", function () {\r
+
+      \    pm.expect(response.cart_items).to.be.an(\"array\");\r
+
+      });\r
+
+      \r
+
+      // Print full response so you can read the real shape\r
+
+      console.log(\"Cart response:\", JSON.stringify(response, null, 2));\r\n"
+    language: text/javascript
+order: 2710796683445019
