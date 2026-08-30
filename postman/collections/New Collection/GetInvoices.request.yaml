@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/invoices"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      console.log(\"Invoices response:\", JSON.stringify(response, null, 2));\r\n"
+    language: text/javascript
+order: 4101414449757629

@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{baseUrl}}/users/login"
+method: POST
+body:
+  type: json
+  content: '{"email":"{{customerEmail}}", "password" : "{{customerPassword}}"}'
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "const response = pm.response.json();\r
+
+      if (response && response.access_token) {\r
+
+      \    pm.environment.set(\"accessToken\", response.access_token);\r
+
+      \    console.log(\"Token saved:\", response.access_token);\r
+
+      }\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r\n"
+    language: text/javascript
+order: 3657633853156484

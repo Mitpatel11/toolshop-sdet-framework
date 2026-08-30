@@ -1,5 +1,4 @@
 const { test, expect } = require('@playwright/test');
-const { number, boolean, string, array } = require('zod');
 
 test('customer token should not access GET /users (admin-only)', async ({ request }) => {
     const loginResponse = await request.post('https://api.practicesoftwaretesting.com/users/login', {
