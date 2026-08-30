@@ -1,0 +1,35 @@
+$kind: http-request
+name: Add Product to Cart
+order: 2000
+url: '{{baseUrl}}/carts/{{cartId}}'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "product_id": "{{productId}}",
+      "quantity": 1
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Parse the response
+      const response = pm.response.json();
+
+      // Test: Check status is 200 OK
+      pm.test("Status code is 200 OK", function () {
+          pm.response.to.have.status(200);
+      });
+
+      // Test: Response confirms item was added
+      pm.test("Product added to cart successfully", function () {
+          pm.expect(pm.response.text()).to.not.be.empty;
+      });
+
+      console.log("Add to cart response:", JSON.stringify(response));

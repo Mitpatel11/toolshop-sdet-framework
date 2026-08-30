@@ -1,0 +1,33 @@
+$kind: http-request
+name: Get Cart ID
+order: 1000
+url: "{{baseUrl}}/carts"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: formdata
+  content: []
+scripts:
+  - type: afterResponse
+    code: |-
+      // Parse the response
+      const response = pm.response.json();
+
+      // Save the cart ID to environment variable for use in next request
+      if (response && response.id) {
+          pm.environment.set("cartId", response.id);
+          console.log("Cart ID saved:", response.id);
+      }
+
+      // Test: Check status is 201 Created
+      pm.test("Status code is 201 Created", function () {
+          pm.response.to.have.status(201);
+      });
+
+      // Test: Response has a cart ID
+      pm.test("Response contains cart ID", function () {
+          pm.expect(response).to.have.property("id");
+      });
+    language: text/javascript

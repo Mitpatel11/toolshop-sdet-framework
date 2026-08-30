@@ -16,6 +16,9 @@ node_modules/
 storageState/
 **/*.storageState.json
 
+# Postman environment
+postman/environments/
+
 # Allure
 /allure-results/
 /allure-report/
