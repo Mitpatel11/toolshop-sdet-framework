@@ -3,6 +3,7 @@ const { ProductPage } = require('./ProductPage');
 const { CartPage } = require('./CartPage');
 const { CheckoutPage } = require('./CheckoutPage');
 const { BasePage } = require('./BasePage');
+const { RegisterPage } = require('./RegisterPage');
 
 class PageManager {
     constructor(page) {
@@ -11,6 +12,7 @@ class PageManager {
         this.productPage = new ProductPage(page);
         this.cartPage = new CartPage(page);
         this.checkoutPage = new CheckoutPage(page);
+        this.registerPage = new RegisterPage(page);
     }
 }
 
