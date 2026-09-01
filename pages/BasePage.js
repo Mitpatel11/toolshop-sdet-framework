@@ -25,6 +25,10 @@ class BasePage {
     async goToCart() {
         await this.cartLink.click();
     }
+
+    async goToRegister() {
+        await this.goTo('/auth/register');
+    }
 }
 
 module.exports = { BasePage };
